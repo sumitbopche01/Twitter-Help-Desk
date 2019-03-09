@@ -7,7 +7,7 @@ const saltingRounds = 10;
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    email: {
         type: 'String',
         required: true,
         trim: true,

@@ -3,9 +3,10 @@ const express = require('express');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const router = express.Router();
+const passport = require('passport');
 
-const routes = require('./routes/index.js');
+const authRoutes = require('./routes/auth-routes');
+const userRoutes = require('./routes/users');
 
 const app = express();
 
@@ -21,8 +22,11 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/api/v1', routes(router));
+app.use('/oauth', authRoutes);
+app.use('/api/v1', userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
