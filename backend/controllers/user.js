@@ -5,8 +5,8 @@ const add = (req, res, next) => {
     let result = {};
     let status = 201;
 
-    const { name, password } = req.body;
-    const user = new User({name, password}); //Document instace of a model
+    const { firstName,lastName,userName, password } = req.body;
+    const user = new User({ firstName,lastName,userName, password }); //Document instace of a model
 
     user.save((err, user) => {
         if(!err){
@@ -14,11 +14,13 @@ const add = (req, res, next) => {
             result.result = user;
         }
         else{
+            console.log("error is as ---- ", err);
             status = 500;
             result.status = status;
-            result.error = err;
+            result.error = err.toString();
         }
         res.status(status).send(result);
+        
     })
 }
 

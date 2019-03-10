@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 module.exports = {
     twitter: {
         consumerKey: process.env['TWITTER_CONSUMER_KEY'],
